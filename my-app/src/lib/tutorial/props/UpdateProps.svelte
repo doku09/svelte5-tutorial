@@ -1,6 +1,5 @@
 <script lang="ts">
- let {count = 0,
- } = $props();
+ let {count = 0 } = $props();
 
 </script>
 

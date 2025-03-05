@@ -26,7 +26,6 @@
   let flag4 = $state(false);
   let dePerson4 = $derived.by(() => {
     let tmp = person4;
-    debugger;
     if(flag4) {
       tmp = {
         name:'hwang',
@@ -36,6 +35,17 @@
     return tmp;
   })
 
+  // 5. 객체가 없을때 derived는 &&연산을 주면 값이 없어도 에러가 나지 않는다. 
+  // let person5:{name:string,age:number} = $state({name:'initName',age:1}) as {name:string,age:number};
+  let person5:{name:string,age:number} = $state() as {name:string,age:number};
+  let name5 = $derived(person5&&person5.name);
+  let age5 = $state(person5&&person5.age);
+
+  $effect(() => {
+    if(person5 && person5.age) {
+    age5 = person5.age;
+    }
+  })
 
 </script>
 
@@ -71,16 +81,38 @@
 </div>
 
 <div class="testCase">
-  <div class="subject"> </div>
-  <div class="when"><button onclick={() => {}}></button> </div>
-  <div class="result"></div>
-  <div class="result"></div>
+  <div class="subject">5. 객체가 없을때 derived는 에러가난다. </div>
+  <div class="when"><button onclick={() => {
+    person5 = {
+    name:'dong',
+    age:20
+  }
+  }}>person5 할당</button> </div>
+
+<div class="when"><button onclick={() => {
+  person5 = {
+  name:'hwang',
+  age:50
+}
+}}>person5 재할당</button> </div>
+   
+  <div class="when"><button onclick={() => {
+    if(person5 && person5.age){
+      person5.age = 10;
+    }
+  }}>person5.age=10</button> </div>
+
+
+  <div class="result">{name5}</div>
+  <div class="result">{age5}</div>
 </div>
 
 <div class="testCase">
   <div class="subject"> </div>
   <div class="when"><button onclick={() => {}}></button> </div>
-  <div class="result"></div>
+  <div class="result">
+    
+  </div>
   <div class="result"></div>
 </div>
 

@@ -4,6 +4,7 @@
 	import DongProps from "./props/DongProps.svelte";
 	import DongState from "./reactivity/DongState.svelte";
 	import DongAdvanceEffect from "./reactivity/DongAdvanceEffect.svelte";
+  import PlayGround from "./reactivity/PlayGround.svelte";
 
 	let activeTab = $state('$props');
 </script>
@@ -28,6 +29,10 @@
 	activeTab = '$props';
 }}>$props</button>
 
+<button onclick={() => {
+	activeTab = 'play';
+}}>play</button>
+
 {#if activeTab === '$state'}
 <DongState/>
 {:else if activeTab === '$derived'}
@@ -38,4 +43,6 @@
 <DongAdvanceEffect/>
 {:else if activeTab === '$props'}
 <DongProps/>
+{:else if activeTab === 'play'}
+<PlayGround/>
 {/if}
