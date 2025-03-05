@@ -1,8 +1,5 @@
 <script>
-    let count = $state(0)
-    
-</script>
-dsdfdd
-{count};
+  import { goto } from "$app/navigation";
 
-<button onclick={()=>{count++}}>a++</button>
+</script>
+<button onclick={()=>{goto('/tutorial')}}>tutorial</button>
