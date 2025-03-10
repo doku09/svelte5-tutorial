@@ -192,7 +192,7 @@ $effect(() => {
     }
   })
 
-// 12. 객체 배열 무한루프 원인미상
+// 12. push는 배열의 length를 set하고 get하기때문에 무한루프 .
 let a12 = $state(false);
 let arr12 = $state([]) as {name:string,age:number,checked:boolean}[];
 
@@ -224,34 +224,24 @@ let init13 = false;
 $effect(() => {
   console.log('effect13 실행');
   if(a13) {
-    // arr13.forEach((e) => {
-    //   e = 1;
-    // })
-
-    // if(!init13) {
-    // arr13 = [];
-    // }
-    // let tmp13:number[] = [1,2,3,4,5];    
-
     // arr13.push(6);
     // arr13 = [1,2,3,4,5];
-    arr13 = arr13;
-    let originArr = arr13;
+    
+    // arr13 = arr13;
+    // let originArr = arr13;
 
-    tmp1.tmp;
-
-    arr13 = originArr;
+    // arr13 = originArr;
     // originArr = []
     // originArr = [5];
     // arr13 = [];
-    console.log(originArr === arr13);
+    // console.log(originArr === arr13);
     // tmp13.forEach(
     //   s => arr13.push(s)
     // );
 
 
  
-    // arr13 = []
+    arr13 = [1]
 
 
     // init13 = true;
@@ -292,37 +282,25 @@ const getFlag14 = () => {
 })
 
 // 15. 비동기적으로 읽힌값은 추적하지 않는다.
-let arr15 = $state([]) as {name:string,age:number,checked:boolean}[];
+let arr15 = $state([{name:'imyoung',age:2,checked:true}]) as {name:string,age:number,checked:boolean}[];
 let a15 = $state(false);
 $effect(() => {
   untrack(() => {
-    console.log($state.snapshot(arr15)); // <= arr15를 추적한다. 이거 풀면 무한루프
+    console.log(arr15); // <= arr15를 추적한다. 이거 풀면 무한루프
   })
-  // arr15.forEach((e) => {
-  //   e.checked = false;
-  // });
-
-  // arr15.map(e => ({...e, checked:false}));
-  // arr15;
-  // arr15 = [];
-  // if(arr15 && arr15[0]){arr15[0].age=999;}
-  // if(arr15 && arr15[0]){arr15=[...arr15];}
-  // arr15[0]
   if(a15) {
+    // arr15.forEach((e) => {
+    //   e.checked = false;
+    // });
+    // arr15.length;
+    arr15
+    // console.log(arr15);
   setTimeout(() => {
-    console.log('running 15');
-    let tmp15 = [
-      {name:'aa',age:10,checked:false},
-      {name:'bb',age:11,checked:true},
-      {name:'cc',age:12,checked:false},
-      {name:'dd',age:13,checked:true}];
-
-    tmp15.forEach(
-      obj => {
-          arr15.push(obj);
-        }
-    );
-
+    // console.log('running 15');
+    // console.log(arr15);
+    // arr15 = [...arr15];
+    arr15 = []
+    // arr15.push({name:'imyoung',age:2,checked:true}) //setTimeout으로 실행되어도 arr.length에 대한 속성은 untrack되지 않음.
   },0)
 }
 })
@@ -452,6 +430,43 @@ $effect(() => {
   }
 });
 
+// 22. 
+
+let a22 = $state(1);	
+	let b22:{id: {name?: string , age? : number}} = $state({id: {name: 'sangwoo' , age : 20}});
+
+	$effect(() => {
+		console.log('############### $effect() #################');
+		if(a22 > 1){
+			update();
+		}
+	
+	});
+
+	const update = () => {
+		// b22.id =  {name: 'test'}; // 2depth 객체를 재할당한다.
+    // b22 = {id: {name: 'sangwoo' , age : 20}};
+		b22.id.age = 21; // 재할당한 id 객체의 age 속성의 값을 변경한다.
+		
+	   // 아래와 같이 속성의 값을 변경시에는 문제없음
+	   // b.id.name = 'test'; 
+	   // b.id.age = 21;
+		console.log('############### End #################');
+	}
+	
+	const onclick22 = () => {
+		a22 = a22 + 1;
+	}
+
+
+  // 23. 템플릿 반응성 테스트
+  let a23 = $state(false);
+  let subject23 = $state('');
+  $effect(() => {
+    if(a23) {
+      console.log('running23');
+    }
+  })
 </script>
 
 <div class="testCase">
@@ -597,11 +612,11 @@ $effect(() => {
   <div class="when"><button onclick={() => {a15 = true}}>a를 true로</button> </div>
   <div class="when"><button onclick={() => {a15 = false}}>a를 false로</button> </div>
   <div class="result">a: {a15}</div>
-  <div class="result">arr: {arr15}</div>
+  <!-- <div class="result">arr: {arr15}</div> -->
   <div class="result">
-    {#each arr15 as item,i}
+    <!-- {#each arr15 as item,i}
     <div class="result">{i}-{item.checked}</div>
-    {/each}
+    {/each} -->
   </div>
 </div>
 
@@ -665,6 +680,21 @@ $effect(() => {
 <div class="testCase">
   <div class="subject">21. 기본객체체 .push (12번과 연결)</div>
   <div class="when"><button onclick={() => {a21 = true}}>실행</button> </div>
+</div>
+
+<div class="testCase">
+  <div class="subject">22. 2depth 객체</div>
+  <div class="when"><button type="button" onclick={onclick22}>Click</button> </div>
+</div>
+
+<div class="testCase">
+  <div class="subject">23. 템플릿 이펙트</div>
+  <div class="when"><button type="button" onclick={()=>{
+    debugger;
+    a23 = true;
+  }}>Click</button> </div>
+  <div class="result">{subject23}</div>
+  <div class="result">{a23}</div>
 </div>
 
 

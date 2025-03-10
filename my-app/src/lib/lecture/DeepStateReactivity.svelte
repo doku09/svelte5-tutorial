@@ -41,6 +41,7 @@
 <p>{array}</p>
 <button
 	onclick={() => {
-		array[1] = Math.random() * 10;
+		// array[1] = Math.random() * 10;
+        array.push(Math.random() * 10);
 	}}>Add to array</button
 >

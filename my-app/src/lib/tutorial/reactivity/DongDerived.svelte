@@ -47,6 +47,27 @@
     }
   })
 
+  // 6. derived.by도 종속성에 따라 반응한다.
+  let a6 = $state(1);
+  // let arr6 = $state([1,2,3]);
+  
+  const  returnValue =  () => {
+    // return arr6.length > 1;
+    return true;
+  }
+  let b6 = $derived.by(() => {
+    console.log('running derived.by()')
+    console.log('a6:',a6);
+    return a6 * 2;
+  });
+
+// 7.
+let a7 = $state(1); let b7 = $state(2); let c7 = $state(3);
+let d7= $state(1); let e7 = $state(2);
+
+function addNumber()  {
+  return a7 + b7 + c7 + d7 + e7;
+}
 </script>
 
 <div class="testCase">
@@ -108,13 +129,27 @@
 </div>
 
 <div class="testCase">
-  <div class="subject"> </div>
-  <div class="when"><button onclick={() => {}}></button> </div>
+  <div class="subject"> 6. derived.by도 종속성?</div>
+  <div class="when"><button onclick={() => {a6+=1}}>a6+1</button> </div>
+  <div class="when"><button onclick={() => {console.log(b6)}}>get.b6</button> </div>
+  <!-- <div class="when"><button onclick={() => {arr6.push(1)}}>arr6.push(1)</button> </div> -->
   <div class="result">
-    
+    <h3>{b6}</h3>
   </div>
   <div class="result"></div>
 </div>
+
+<div class="testCase">
+  <div class="subject"> 7. derived와 함수</div>
+  <div class="when"><button onclick={() => {a7+=1}}>a+1</button> </div>
+  <div class="when"><button onclick={() => {b7+=1}}>b+1</button> </div>
+  <div class="result"><h3>{addNumber()}</h3>
+  </div>
+</div>
+
+
+
+
 
 <div style="padding-bottom:500px;"></div>
 

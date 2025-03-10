@@ -56,13 +56,9 @@ age.setValue(36);
 
 
 const myCar = new Car();
-
-
 </script>
 
 {y}
 
-{myCar.fuel}<br/>
-should I refuel? {myCar.shouldRefuel}
 <button onclick={()=> myCar.refuel()}>Refuel</button>
 <button onclick={()=> myCar.drive(20)}>Drive</button>

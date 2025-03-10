@@ -5,8 +5,11 @@
 	import DongState from "./reactivity/DongState.svelte";
 	import DongAdvanceEffect from "./reactivity/DongAdvanceEffect.svelte";
   import PlayGround from "./reactivity/PlayGround.svelte";
+  import Snippet from "./snippet/Snippet.svelte";
+  import DongStoreMain from "./store/DongStoreMain.svelte";
 
-	let activeTab = $state('$props');
+	// let activeTab = $state('$props');
+	let activeTab = $state('$effect');
 </script>
 <!-- ************************************************************ -->
 <!-- ************************************************************ -->
@@ -30,6 +33,12 @@
 }}>$props</button>
 
 <button onclick={() => {
+	activeTab = 'snippet';
+}}>snippet</button>
+<button onclick={() => {
+	activeTab = 'store';
+}}>store</button>
+<button onclick={() => {
 	activeTab = 'play';
 }}>play</button>
 
@@ -43,6 +52,10 @@
 <DongAdvanceEffect/>
 {:else if activeTab === '$props'}
 <DongProps/>
+{:else if activeTab === 'snippet'}
+<Snippet/>
+{:else if activeTab === 'store'}
+<DongStoreMain/>
 {:else if activeTab === 'play'}
 <PlayGround/>
 {/if}
