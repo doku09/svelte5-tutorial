@@ -1,1 +1,1 @@
-# svelte-board
+# svelte5 tutorial 
