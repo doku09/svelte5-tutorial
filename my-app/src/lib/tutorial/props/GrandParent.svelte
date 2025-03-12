@@ -4,5 +4,5 @@
 </script>
 
 <p>Value in GrandParent: {value}</p>
-<Parent {value} />
+<Parent bind:value />
 <!-- <Parent bind:value /> -->

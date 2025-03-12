@@ -7,6 +7,7 @@
   import PlayGround from "./reactivity/PlayGround.svelte";
   import Snippet from "./snippet/Snippet.svelte";
   import DongStoreMain from "./store/DongStoreMain.svelte";
+  import ContextMain from "./context/ContextMain.svelte";
 
 	// let activeTab = $state('$props');
 	let activeTab = $state('$effect');
@@ -39,6 +40,9 @@
 	activeTab = 'store';
 }}>store</button>
 <button onclick={() => {
+	activeTab = 'context';
+}}>context</button>
+<button onclick={() => {
 	activeTab = 'play';
 }}>play</button>
 
@@ -56,6 +60,8 @@
 <Snippet/>
 {:else if activeTab === 'store'}
 <DongStoreMain/>
+{:else if activeTab === 'context'}
+<ContextMain/>
 {:else if activeTab === 'play'}
 <PlayGround/>
 {/if}

@@ -151,7 +151,7 @@ let total = $derived(a + b +c +d +e);
 
  2 방법은  O(n+m) 성능으로 성능은 낫지만 total 변수 하나에 많은 템플릿이 의존하게 되므로 부작용이 일어날 확률이 생긴다. 
 
-두개의 방법에서는 적절한 방법이 필요함
+두개의 방법에서는 적절한 방법을 선택해야한다.
 > 참고:  [peter svelte](https://www.youtube.com/watch?v=ezW1gc9GqCg)
 
 

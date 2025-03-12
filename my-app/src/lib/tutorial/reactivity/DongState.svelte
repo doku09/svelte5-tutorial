@@ -64,6 +64,9 @@ let a9;
 <div class="subject">1. $state를 사용하지 않으면 DOM에 그려진 변수가 반응은 한다. (컴포넌트안에 state로 선언된 변수가 있으면 동작하지 않는다. 2번 테스트를 주석처리하면 동작함)</div>
 <button onclick={() => {a1++;}}>a1++</button>
 a1 = {a1}
+{#if a1>0}
+  {a1}
+{/if}
 </div>
 
 <div class="testCase">

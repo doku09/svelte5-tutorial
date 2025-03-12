@@ -1,5 +1,5 @@
 <script lang="ts">
-  let {value=$bindable()}=$props();
+  let {value}=$props();
 </script>
 
 <p>Value in Child: {value}</p>
