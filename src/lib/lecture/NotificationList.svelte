@@ -6,7 +6,7 @@
 </script>
 
 <ul>
-	{#each notifications as notification,index}
+	{#each notifications as notification}
 		<li>
 			<Notification
 				{notification}

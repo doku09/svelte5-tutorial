@@ -467,6 +467,23 @@ let a22 = $state(1);
       console.log('running23');
     }
   })
+
+  //24. 스프레드연산자 배열 재할당 무한루프
+  let a24:boolean = $state(false);
+  let parentArr24:number[] = $state([]) as number[];
+  let childArr24 = $state([1,2,3,4,5]);
+  let b24 = {
+    parentArr24:[]
+  }
+  let selected:number[] = $state([]);
+  $effect(() => {
+    if(a24) {
+      debugger;
+    if(selected !== parentArr24) {
+      selected = parentArr24;
+    }
+  }
+  })
 </script>
 
 <div class="testCase">
@@ -695,6 +712,18 @@ let a22 = $state(1);
   }}>Click</button> </div>
   <div class="result">{subject23}</div>
   <div class="result">{a23}</div>
+</div>
+
+<div class="testCase">
+  <div class="subject">24.</div>
+  <div class="when"><button type="button" onclick={()=>{
+    a24 = true;
+  }}>a24 = true;</button> </div>
+  <div class="when"><button type="button" onclick={()=>{
+    debugger;
+    parentArr24 = [...childArr24]
+  }}>Click</button> </div>
+  <div class="result">{a24}</div>
 </div>
 
 

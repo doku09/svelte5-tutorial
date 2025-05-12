@@ -8,9 +8,11 @@
   import Snippet from "./snippet/Snippet.svelte";
   import DongStoreMain from "./store/DongStoreMain.svelte";
   import ContextMain from "./context/ContextMain.svelte";
+  import AdvanceObj from "./reactivity/AdvanceObj.svelte";
+  import AdvancedComponent from "./reactivity/AdvancedComponent.svelte";
 
 	// let activeTab = $state('$props');
-	let activeTab = $state('$effect');
+	let activeTab = $state('advancedObj');
 </script>
 <!-- ************************************************************ -->
 <!-- ************************************************************ -->
@@ -42,6 +44,13 @@
 <button onclick={() => {
 	activeTab = 'context';
 }}>context</button>
+
+<button onclick={() => {
+	activeTab = 'advancedObj';
+}}>advancedObj</button>
+<button onclick={() => {
+	activeTab = 'advanceSvelteComponent';
+}}>advanceSvelteComponent</button>
 <button onclick={() => {
 	activeTab = 'play';
 }}>play</button>
@@ -62,6 +71,10 @@
 <DongStoreMain/>
 {:else if activeTab === 'context'}
 <ContextMain/>
+{:else if activeTab === 'advancedObj'}
+<AdvanceObj/>
+{:else if activeTab === 'advanceSvelteComponent'}
+<AdvancedComponent/>
 {:else if activeTab === 'play'}
 <PlayGround/>
 {/if}

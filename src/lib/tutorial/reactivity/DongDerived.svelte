@@ -68,6 +68,75 @@ let d7= $state(1); let e7 = $state(2);
 function addNumber()  {
   return a7 + b7 + c7 + d7 + e7;
 }
+
+// 8. 객체형 derived 
+const value = () => ({
+  username:'dong',
+  age:20
+})
+let b8= $state(value())
+let a8 = $derived(b8);
+
+// 9. state에 state? 
+class Person9 {
+  username = $state('dong')
+  age = $state(20)
+  dog = $state({
+    name:'qqu',
+    age: 19
+  })
+
+  constructor() {
+    this.username = 'after'
+    this.age = 30
+    this.dog = {
+      name:'qqu',
+      age: 19
+    } 
+  }
+
+  public getMydog() {
+    return this.dog;
+  }
+}
+  let p9 = new Person9();
+  let d9 = $state(p9.getMydog());
+
+
+//10. derived.by로 배열객체가 변할때 반응성으로 변하게한다. 
+let a10 = $state([
+  {username:'aa',age:20},
+  {username:'bb',age:30},
+  {username:'cc',age:40},
+  {username:'dd',age:50}
+]);
+
+const toListData = (list) => {
+  const newList = [];
+  list.forEach((item) => {
+
+    newList.push({
+      myName:item.username,
+      myAge:item.age
+    });
+    return newList;
+  })
+  debugger;
+  return newList;
+}
+
+let b10 = $derived.by(() => {
+  
+  console.log('10번 derived.by()')
+  // return a10.filter((item) => item.age > 30);
+  return toListData(a10);
+})
+
+let c10 = {username:'ee',age:60};
+  const a10push = () => {
+    c10.age = Math.floor(Math.random() * 100);
+    a10.push(c10);
+  }
 </script>
 
 <div class="testCase">
@@ -134,7 +203,8 @@ function addNumber()  {
   <div class="when"><button onclick={() => {console.log(b6)}}>get.b6</button> </div>
   <!-- <div class="when"><button onclick={() => {arr6.push(1)}}>arr6.push(1)</button> </div> -->
   <div class="result">
-    <h3>{b6}</h3>
+    <h3>a6:{a6}</h3>
+    <!-- <h3>b6:{b6}</h3> -->
   </div>
   <div class="result"></div>
 </div>
@@ -147,6 +217,45 @@ function addNumber()  {
   </div>
 </div>
 
+
+<div class="testCase">
+  <div class="subject"> 8.</div>
+  <div class="when"><button onclick={() => {b8.age=30}}>b8.age=30</button> </div>
+  <div class="when"><button onclick={() => {a8.age=40}}>a8.age=40</button> </div>
+  <div class="result">a8.username:{a8.username}</div>
+  <div class="result">a8.age:{a8.age}</div>
+  <div class="result">b8.username:{b8.username}</div>
+  <div class="result">b8.age:{b8.age}</div>
+</div>
+
+<div class="testCase">
+  <div class="subject"> 9.</div>
+  <div class="when"><button onclick={() => {p9.username='changeName'}}>p9.p9.username='changeName'</button> </div>
+  <div class="when"><button onclick={() => {p9.age=40}}>p9.age=40</button> </div>
+  <div class="when"><button onclick={() => {d9={name:'tong',age:2}}}>d9를 통째로 업데이트 치면 state상태가 안되나?</button> </div>
+
+  <div class="when"><button onclick={() => {d9.name='changeDogName'}}>d9.name='changeDogName'</button> </div>
+  <div class="when"><button onclick={() => {d9.age=25}}>d9.age=25</button> </div>
+
+  <div class="when"><button onclick={() => {d9.name='haha'}}>d9.name='changeDogName'</button> </div>
+  <div class="when"><button onclick={() => {d9.age=10}}>d9.age=25</button> </div>
+  <div class="result">p9.username:{p9.username}</div>
+  <div class="result">p9.age:{p9.age}</div>
+  <div class="result">d9.username:{d9.name}</div>
+  <div class="result">d9.age:{d9.age}</div>
+</div>
+
+<div class="testCase">
+  <div class="subject"> 10. derived.by로 배열 반환</div>
+  <div class="when"><button onclick={a10push}>a10push</button> </div>
+  {#each a10 as item}
+    <div class="result"><h3>{item.username}:{item.age}</h3></div>
+  {/each}
+  <div>========B===============</div>
+  {#each b10 as item(item)}
+    <div class="result"><h3>{item.myName}:{item.myAge}</h3></div>
+  {/each}
+</div>
 
 
 

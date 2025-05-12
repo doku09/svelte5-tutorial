@@ -1,7 +1,12 @@
-<script>
+<script lang="ts">
   import SnippetChild from "./SnippetChild.svelte";
+  interface Props {
+	message:string;
+    data: any; // Bind Section
+    children?: import('svelte').Snippet;
+  }
 
-	let { message = `it's great to see you!` } = $props();
+	let { message = `it's great to see you!`,data, children } = $props();
 
 	const fruits = [
 		{ name: 'apples', qty: 5, price: 2 },
@@ -50,15 +55,18 @@
 	<td>{d.qty * d.price}</td>
 {/snippet}
 
-<SnippetChild data={fruits} {header} {row}/>
+<!-- <SnippetChild data={fruits} {header} {row}/> -->
 
-<SnippetChild data={fruits}>
+<!-- <SnippetChild data={fruits}>
 	{#snippet header()}
 		<th>fruit</th>
 		<th>qty</th>
 		<th>price</th>
 		<th>total</th>
 	{/snippet}
+	{#snippet children()}
+	<h1>children</h1>
+{/snippet}
 
 	{#snippet row(d)}
 		<td>{d.name}</td>
@@ -66,4 +74,7 @@
 		<td>{d.price}</td>
 		<td>{d.qty * d.price}</td>
 	{/snippet}
-</SnippetChild>
+</SnippetChild> -->
+
+{@render children?.()}
+

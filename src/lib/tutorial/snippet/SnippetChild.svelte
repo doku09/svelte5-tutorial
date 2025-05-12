@@ -1,5 +1,5 @@
 <script>
-    let {data, header, row} = $props();
+    let {data, header, row, children} = $props();
 </script>
 
 <table>
@@ -12,3 +12,10 @@
 {/each}
 </tbody>
 </table>
+
+
+{#if children}
+	{@render children()}
+{:else}
+	fallback content
+{/if}
