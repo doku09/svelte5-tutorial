@@ -57,7 +57,7 @@
 
 <!-- <SnippetChild data={fruits} {header} {row}/> -->
 
-<!-- <SnippetChild data={fruits}>
+<SnippetChild data={fruits}>
 	{#snippet header()}
 		<th>fruit</th>
 		<th>qty</th>
@@ -74,7 +74,7 @@
 		<td>{d.price}</td>
 		<td>{d.qty * d.price}</td>
 	{/snippet}
-</SnippetChild> -->
+</SnippetChild>
 
 {@render children?.()}
 

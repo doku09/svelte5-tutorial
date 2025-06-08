@@ -1,11 +1,14 @@
 <script lang="ts">
   import { userState } from "./state.svelte";
+
+
+  let config = userState;
 </script>
 <h2>StoreChild1</h2>
-<p>User name: {userState.name}</p>
-<p>User age: {userState.age}</p>
+<p>User name: {config.name}</p>
+<p>User age: {config.age}</p>
 <button onclick={() => {
-	userState.name = 'child 1';
+	config.name = 'child 1';
 }}>
 	change name
 </button>

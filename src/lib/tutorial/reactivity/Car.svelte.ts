@@ -9,3 +9,12 @@ export class Car {
         this.fuel = this.fuel - distance;
     }
 }
+
+
+export const carObj = $state({
+  reloadKey: 0
+});
+
+export const reloadAppClWorkTree = () => {
+  carObj.reloadKey++;
+};

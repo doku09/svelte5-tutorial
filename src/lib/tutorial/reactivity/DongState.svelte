@@ -1,4 +1,7 @@
 <script lang="ts">
+  import AComp from "./AComp.svelte";
+  import { carObj, reloadAppClWorkTree } from "./Car.svelte";
+
 // 1. $state를 사용하지 않으면 html에 그린 변수가 반응하지 않는다.
 let a1 = 0;
 // 2. $state를 사용해도 변수가 반응한다.
@@ -54,7 +57,16 @@ bs = 4;
 console.log(total9()); // 3
 
 // 9 .
-let a9;
+class Person {
+  name: string = $state('dong');
+  constructor(name: string) {
+    this.name = name;
+  }
+}
+let person = $state(new Person('dong'));
+
+// 10.
+
 
 
 //
@@ -122,12 +134,22 @@ a1 = {a1}
 </div>
 
 <div class="testCase">
-  <div class="subject"> 9. 초기화 안하고 중간에 state로 초기화는 안된다. </div>
+  <div class="subject"> 9. 클래스는 생성시 state를 걸어야 재할당시 반응성을 탄다. </div>
   <div class="when"><button onclick={() => {
-    // a9 = $state(0);
-  }}></button> </div>
-  <div class="result">a9: {a9}</div>
+    person = new Person('yussi');
+  }}>person.name변경</button> </div>
+  <div class="result">person.name: {person.name}</div>
 </div>
+
+<div class="testCase">
+  <div class="subject"> 10. 클래스 내부 상수는 반응성을 가진다. </div>
+  <div class="when"><button onclick={() => {
+    reloadAppClWorkTree();
+  }}>person.name변경</button> </div>
+  <div class="result">carObj.reloadKey: {carObj.reloadKey}</div>
+  <AComp/>
+</div>
+
 
 <div style="padding-bottom:500px;"></div>
 

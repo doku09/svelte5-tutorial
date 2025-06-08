@@ -10,6 +10,7 @@
   import ContextMain from "./context/ContextMain.svelte";
   import AdvanceObj from "./reactivity/AdvanceObj.svelte";
   import AdvancedComponent from "./reactivity/AdvancedComponent.svelte";
+  import DongLifeCycle from "./lifecycle/DongLifeCycle.svelte";
 
 	// let activeTab = $state('$props');
 	let activeTab = $state('advancedObj');
@@ -30,6 +31,10 @@
 <button onclick={() => {
 	activeTab = '$effect';
 }}>$effect</button>
+
+<button onclick={() => {
+	activeTab = 'lifeCycle';
+}}>LifeCycle</button>
 
 <button onclick={() => {
 	activeTab = '$props';
@@ -69,6 +74,8 @@
 <Snippet/>
 {:else if activeTab === 'store'}
 <DongStoreMain/>
+{:else if activeTab === 'lifeCycle'}
+<DongLifeCycle/>
 {:else if activeTab === 'context'}
 <ContextMain/>
 {:else if activeTab === 'advancedObj'}

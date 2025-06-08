@@ -100,7 +100,7 @@ class Person9 {
   }
 }
   let p9 = new Person9();
-  let d9 = $state(p9.getMydog());
+  let d9 = p9.getMydog();
 
 
 //10. derived.by로 배열객체가 변할때 반응성으로 변하게한다. 
@@ -230,7 +230,7 @@ let c10 = {username:'ee',age:60};
 
 <div class="testCase">
   <div class="subject"> 9.</div>
-  <div class="when"><button onclick={() => {p9.username='changeName'}}>p9.p9.username='changeName'</button> </div>
+  <div class="when"><button onclick={() => {p9.username='changeName'}}>p9.username='changeName'</button> </div>
   <div class="when"><button onclick={() => {p9.age=40}}>p9.age=40</button> </div>
   <div class="when"><button onclick={() => {d9={name:'tong',age:2}}}>d9를 통째로 업데이트 치면 state상태가 안되나?</button> </div>
 
@@ -238,7 +238,7 @@ let c10 = {username:'ee',age:60};
   <div class="when"><button onclick={() => {d9.age=25}}>d9.age=25</button> </div>
 
   <div class="when"><button onclick={() => {d9.name='haha'}}>d9.name='changeDogName'</button> </div>
-  <div class="when"><button onclick={() => {d9.age=10}}>d9.age=25</button> </div>
+  <div class="when"><button onclick={() => {d9.age=10}}>d9.age=10</button> </div>
   <div class="result">p9.username:{p9.username}</div>
   <div class="result">p9.age:{p9.age}</div>
   <div class="result">d9.username:{d9.name}</div>
